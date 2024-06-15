@@ -1,0 +1,173 @@
+#!/bin/bash
+
+echo "System Information !"
+
+#Total Average CPU speed (in MHz)
+echo "Total Average CPU speed (in MHz): "
+awk -F:  '/cpu MHz/ {sum +=$2; count++} END {print sum/count} ' /proc/cpuinfo
+echo "---------------------------------------------------------------------------------"
+#Number of cpu cores
+echo "Number of cpu cores : "
+awk -F: '/cpu cores/ {print $2;exit}' /proc/cpuinfo
+echo "---------------------------------------------------------------------------------"
+
+#CPU Model
+echo "CPU Model : "
+awk -F: '/model name/ {print $2;exit} ' /proc/cpuinfo
+echo "---------------------------------------------------------------------------------"
+
+#Total Memory (in kB)
+echo "Total Memory (in kB) : "
+awk '/MemTotal/ {print $2}' /proc/meminfo
+echo "---------------------------------------------------------------------------------"
+
+#Check Free Memory (Check live for 5 Seconds)
+echo "Free Memory (live check for 5 seconds) : "
+for i in {1..5}; do awk '/MemFree/ {print $2}' /proc/meminfo; sleep 1; done
+echo "---------------------------------------------------------------------------------"
+#!/bin/bash
+
+echo "System Information !"
+
+#Total Average CPU speed (in MHz)
+echo "Total Average CPU speed (in MHz): "
+awk -F:  '/cpu MHz/ {sum +=$2; count++} E#check kernel version
+echo "Kernel Version : "
+cat /proc/version
+echo "---------------------------------------------------------------------------------"
+
+#Maximum Amount of files that can be Opened
+echo "Maximum Number of files that can be opened : "
+cat /proc/sys/fs/file-max
+echo "---------------------------------------------------------------------------------"
+
+#Check Maximum Size of pipe Buffer
+echo "Maximum Size Of Pipe Buffer : "
+cat /proc/sys/fs/pipe-max-size
+echo "---------------------------------------------------------------------------------"
+
+#Check OS Type
+echo "OS Type : "
+uname -o
+echo "---------------------------------------------------------------------------------"
+
+#check OS Release
+echo "OS Release :  "
+uname -r
+echo "---------------------------------------------------------------------------------"
+
+#show Network Interfaces Name
+echo "Network Interfaces Names : "
+ls /sys/class/net
+echo "---------------------------------------------------------------------------------"
+#check kernel version
+echo "Kernel Version : "
+cat /proc/version
+echo "---------------------------------------------------------------------------------"
+
+#Maximum Amount of files that can be Opened
+echo "Maximum Number of files that can be opened : "
+cat /proc/sys/fs/file-max
+echo "---------------------------------------------------------------------------------"
+
+#Check Maximum Size of pipe Buffer
+echo "Maximum Size Of Pipe Buffer : "
+cat /proc/sys/fs/pipe-max-size
+echo "---------------------------------------------------------------------------------"
+
+#Check OS Type
+echo "OS Type : "
+uname -o
+echo "---------------------------------------------------------------------------------"
+
+#check OS Release
+echo "OS Release :  "
+uname -r
+echo "---------------------------------------------------------------------------------"
+
+#show Network Interfaces Name
+echo "Network Interfaces Names : "
+ls /sys/class/net
+echo "---------------------------------------------------------------------------------"
+ND {print sum/count} ' /proc/cpuinfo
+echo "---------------------------------------------------------------------------------"
+#Number of cpu cores
+echo "Number of cpu cores : "
+awk -F: '/cpu cores/ {print $2;exit}' /proc/cpuinfo
+echo "---------------------------------------------------------------------------------"
+
+#CPU Model
+echo "CPU Model : "
+awk -F: '/model name/ {print $2;exit} ' /proc/cpuinfo
+echo "---------------------------------------------------------------------------------"
+
+#Total Memory (in kB)
+echo "Total Memory (in kB) : "
+awk '/MemTotal/ {print $2}' /proc/meminfo
+echo "---------------------------------------------------------------------------------"
+
+#Check Free Memory (Check live for 5 Seconds)
+echo "Free Memory (live check for 5 seconds) : "
+for i in {1..5}; do awk '/MemFree/ {print $2}' /proc/meminfo; sleep 1; done
+echo "---------------------------------------------------------------------------------"
+#check kernel version
+echo "Kernel Version : "
+cat /proc/version
+echo "---------------------------------------------------------------------------------"
+
+#Maximum Amount of files that can be Opened
+echo "Maximum Number of files that can be opened : "
+cat /proc/sys/fs/file-max
+echo "---------------------------------------------------------------------------------"
+
+#Check Maximum Size of pipe Buffer
+echo "Maximum Size Of Pipe Buffer : "
+cat /proc/sys/fs/pipe-max-size
+echo "---------------------------------------------------------------------------------"
+
+#Check OS Type
+echo "OS Type : "
+uname -o
+echo "---------------------------------------------------------------------------------"
+
+#check OS Release
+echo "OS Release :  "
+uname -r
+echo "---------------------------------------------------------------------------------"
+
+#show Network Interfaces Name
+echo "Network Interfaces Names : "
+ls /sys/class/net
+echo "---------------------------------------------------------------------------------"
+
+#show Wireless Network Interfaces Name
+echo "wireless Network Interfaces Name : "
+ls /sys/class/net | grep '^w'
+echo "---------------------------------------------------------------------------------"
+
+#show Available Network Protocols
+echo "Available Network Protocols : "
+cat /proc/net/protocols
+echo "---------------------------------------------------------------------------------"
+
+#show Amount of Received Packets of Online Network Interface
+echo "Amount of Received Packets of Online Networl Interface : "
+for iface in $(ls /sys/class/net); do
+        operstate=$(cat /sys/class/net/$iface/operstate)
+        if [ $operstate == "up" ]; then
+        rx_packets=$(cat /sys/class/net/$iface/statistics/rx_packets)
+                echo "$iface : $rx_packets  packets received!"
+        else
+                echo "$iface is down"
+        fi
+ done
+echo "---------------------------------------------------------------------------------"
+#show OS uptime
+echo "OS Uptime : "
+awk '{print int($1/60)} " minutes"' /proc/uptime
+echo "---------------------------------------------------------------------------------"
+
+#show Inpur Devices of Bus
+echo "Input Devices of Bus : "
+ls /proc/bus/input
+echo "-----------------------------------END----------------------------------------------"
